@@ -1,7 +1,67 @@
-from app.classes.book import library
-from app.classes.user import users
+from database.connect import connect_db
+from mysql.connector import Error
 
 def borrow_book():
+
+    try:
+        conn = connect_db()
+        cursor = conn.cursor()
+
+        book_id = int(input("Enter the id of the book that's being borrowed:\n"))
+        status = False
+
+        update_book = (status, book_id)
+
+        query = "UPDATE books SET status = %s WHERE customer_id = %s"
+
+        cursor.execute(query, update_book)
+        conn.commit()
+        print("Book status changed succesfully updated!")
+
+    except Error as e:
+        print(f"Error: {e}")
+    
+    finally:
+        if conn and conn.is_connected():
+            cursor.close()
+            conn.close() 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         title = input("Enter the name of the book:\n").title().strip()
         author = input("Enter the name of the author:\n").title().strip()
         user_id = input(
