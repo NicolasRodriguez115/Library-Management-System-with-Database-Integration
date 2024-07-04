@@ -1,4 +1,3 @@
-from app.classes.user import users
 from database.connect import connect_db
 from mysql.connector import Error
 def display_users():
@@ -22,7 +21,7 @@ Users:
 
     finally:
         if conn and conn.is_connected():
-            cursor.close() #turns off the cursor
-            conn.close() #turns of the connection to the db
+            cursor.close()
+            conn.close() 
 
 
