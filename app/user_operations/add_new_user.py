@@ -1,9 +1,22 @@
-from app.classes.user import User
+from database.connect import connect_db
+from mysql.connector import Error
 import random 
 def new_user():
-    name = input("Enter the first and last name of the user:\n").title().strip()
-    user_id = str(random.randint(100000, 999999))
-    new_user = User(name, user_id)
-    new_user.new_user()
-    input(f"You've succesfully created a user for {name} with customer ID {user_id} to the library! Press 'enter' to go back.\n ")
+    try:
+        conn = connect_db()
+        cursor = conn.cursor()
+
+        name = input("Enter the first and last name of the user:\n").title().strip()
+        query = "INSERT INTO users (name) VALUES (%s)"
+        cursor.execute(query, name) # prepares query with arguments
+        conn.commit()
+        input(f"You've succesfully created a user for {name} with customer ID {user_id} to the library! Press 'enter' to go back.\n ")
+    except Error as e:
+        print(f"Error: {e}")
+
+    finally:
+        if conn and conn.is_connected():
+            cursor.close()
+            conn.close()
     return
+    

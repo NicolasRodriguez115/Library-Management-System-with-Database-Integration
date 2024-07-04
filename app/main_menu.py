@@ -4,6 +4,7 @@ from app.author_operations.menu import author_operations_menu
 from app.mock_library.import_library import import_library
 import os
 import database.connect as db
+from mysql.connector import Error
 def main_menu():
     while True:
         os.system("cls")
