@@ -1,6 +1,48 @@
 from app.classes.book import Book
 from app.classes.author import authors, Author
+from database.connect import connect_db
+from mysql.connector import Error
 def new_book():
+    try:
+        conn = connect_db()
+        cursor = conn.cursor()
+
+        book_name = input("Enter the title of the book:\n").title().strip()
+        author_name = input("Enter the name of the author for the book:\n").title().strip()
+        publication_date = input("Enter the publication date of the book:\n").capitalize().strip()
+        status = True
+        query = "INSERT INTO books (book_name, author_name, publication_date, status) VALUES (%s, %s,%s, %s)"
+        cursor.execute(query, book_name, author_name, publication_date, status) 
+        conn.commit()
+        input(f"You've succesfully added {book_name} by {author_name} to the library! Press 'enter' to go back.\n ")
+
+    except Error as e:
+        print(f"Error: {e}")
+
+    finally:
+        if conn and conn.is_connected():
+            cursor.close()
+            conn.close()
+
+    return
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     title = input("Enter the title of the book:\n").title().strip()
     author_name = input("Enter the name of the author for the book:\n").title().strip()
     publication_date = input("Enter the publication date of the book:\n").strip()
