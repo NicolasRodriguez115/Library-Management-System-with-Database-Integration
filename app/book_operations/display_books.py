@@ -16,6 +16,8 @@ Books:
         for row in cursor.fetchall():
             print(row) 
 
+        input("Press 'enter' to go back.\n ") 
+
     except Error as e:
         print(f"Error: {e}")
 
@@ -24,6 +26,7 @@ Books:
             cursor.close()
             conn.close()         
 
+    return
 
 
 

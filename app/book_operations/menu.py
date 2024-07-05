@@ -1,5 +1,5 @@
 import os
-from app.book_operations import add_new_book as ab, display_books as db, borrow_book as bb,  return_book as rb, search_for_book as sb
+from app.book_operations import add_new_book as ab, display_books as db, borrow_book as bb,  return_book as rb, search_for_book_menu as sb
 def book_operations_menu():
     while True:
         os.system("cls")    
@@ -12,7 +12,7 @@ Book Operations:
     5. Display all books
     6. Quit
 
-""")
+""").strip()
         if user_input == "1":
             os.system("cls")
             ab.new_book()

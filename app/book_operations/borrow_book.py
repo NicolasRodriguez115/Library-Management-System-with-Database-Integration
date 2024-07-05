@@ -7,7 +7,7 @@ def borrow_book():
         conn = connect_db()
         cursor = conn.cursor()
 
-        book_id = int(input("Enter the id of the book that's being borrowed:\n"))
+        book_id = int(input("Enter the id of the book that's being borrowed:\n")).strip()
         status = False
 
         update_book = (status, book_id)
@@ -16,7 +16,7 @@ def borrow_book():
 
         cursor.execute(query, update_book)
         conn.commit()
-        print("Book status changed succesfully updated!")
+        input("Book status changed succesfully updated! Press 'enter' to go back.\n ")
 
     except Error as e:
         print(f"Error: {e}")
@@ -24,7 +24,9 @@ def borrow_book():
     finally:
         if conn and conn.is_connected():
             cursor.close()
-            conn.close() 
+            conn.close()
+
+    return
 
 
 

@@ -14,7 +14,9 @@ Users:
         cursor.execute(query)
 
         for row in cursor.fetchall():
-            print(row) 
+            print(row)
+
+        input("Press 'enter' to go back.\n ")      
 
     except Error as e:
         print(f"Error: {e}")
@@ -22,6 +24,8 @@ Users:
     finally:
         if conn and conn.is_connected():
             cursor.close()
-            conn.close() 
+            conn.close()
+    
+    return
 
 

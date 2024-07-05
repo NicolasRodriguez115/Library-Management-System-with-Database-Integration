@@ -7,10 +7,10 @@ def author_operations_menu():
         user_input = input("""
 Author Operations:                         
     1. Add a new author
-    3. Display all authors
-    4. Quit
+    2. Display all authors
+    3. Quit
 
-""")
+""").strip()
         if user_input == "1":
             os.system("cls")
             new_author()
