@@ -1,6 +1,8 @@
 from database.connect import connect_db
 from mysql.connector import Error
 from app.book_operations.search_book_id import search_book_id
+from app.book_operations.search_book_title import search_book_title
+from app.book_operations.search_book_author import search_book_author
 import os
 def search_book():
     while True:    
@@ -16,56 +18,14 @@ Please select the option by which you'd like to search for a book.
             search_book_id()
         elif user_input == "2":
             os.system("cls")
-            borrow_book()
+            search_book_title()
         elif user_input == "3":
             os.system("cls")
-            return_book()
+            search_book_author()
         elif user_input == "4":
             return
         else:
             input("You've not entered a valid option. Please try again after pressing 'enter'\n ")
-    try:
-        conn = connect_db()
-        cursor = conn.cursor()
-
-
-        query = "SELECT * FROM books"
-
-        cursor.execute(query)
-
-        for row in cursor.fetchall():
-            print(row) 
-
-    except Error as e:
-        print(f"Error: {e}")
-
-    finally:
-        if conn and conn.is_connected():
-            cursor.close()
-            conn.close()     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

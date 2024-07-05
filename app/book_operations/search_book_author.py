@@ -1,6 +1,6 @@
 from database.connect import connect_db
 from mysql.connector import Error
-def search_book_id():
+def search_book_author():
     print("""
 Books:
 ------------
@@ -9,20 +9,20 @@ Books:
         conn = connect_db()
         cursor = conn.cursor()
 
-        book_id = int(input("Enter the ID of the book you're looking for:\n").strip())
-        query = "SELECT book_id FROM books"
+        book_author = input("Enter the name of the author of the book you're looking for:\n").title.strip()
+        query = "SELECT book_author FROM books"
 
         cursor.execute(query)
         for row in cursor.fetchall():
-            if row == book_id:
-                query = f"SELECT * FROM books WHERE book_id = {book_id}"
+            if row == book_author:
+                query = f"SELECT * FROM books WHERE book_author = {book_author}"
                 cursor.execute(query)
                 for book in cursor.fetchall():
                     print(book)
                     input("Press 'enter' to go back.\n ") 
 
             else:
-                input("That ID doesn't exist. You'll go back to the menu after pressing 'enter'\n ")
+                input("That author doesn't exist. You'll go back to the menu after pressing 'enter'\n ")
 
 
     except Error as e:

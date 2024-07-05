@@ -26,19 +26,6 @@ def return_book():
 
     return
 
-
-
-
-
-
-
-
-
-
-
-
-
-
         # while True:
         #     title = input("Enter the name of the book:\n").title().strip()
         #     author = input("Enter the name of the author:\n").title().strip()

@@ -27,22 +27,6 @@ def new_book():
     return
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     title = input("Enter the title of the book:\n").title().strip()
     author_name = input("Enter the name of the author for the book:\n").title().strip()
     publication_date = input("Enter the publication date of the book:\n").strip()

@@ -31,39 +31,6 @@ def borrow_book():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         title = input("Enter the name of the book:\n").title().strip()
         author = input("Enter the name of the author:\n").title().strip()
         user_id = input(
