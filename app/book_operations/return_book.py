@@ -1,24 +1,28 @@
-from app.classes.book import library
-from app.classes.user import users
+from database.connect import connect_db
+from mysql.connector import Error
 def return_book():
-        title = input("Enter the name of the book:\n").title().strip()
-        author = input("Enter the name of the author:\n").title().strip()
-        user_id = input(
-    """ Enter the ID of the user who borrowed the book 
-    (if the user doesn't have a user ID just press 'enter'):\n """).strip()
-        for book in library:
-            if book.title == title and book.author == author:
-                response = book.return_book()
-                input(response["Message"])
-                for user in users:
-                    if user.get_user_id() == user_id:
-                        user.book_returned(book.title)
-                        return
-                return
-        input("The information you entered doesn't match with any book in the library.\nYou'll return to the menu after pressing 'enter'\n ")
-        return
+    try:
+        conn = connect_db()
+        cursor = conn.cursor()
 
+        book_id = int(input("Enter the id of the book that's being returned:\n"))
+        status = True
 
+        update_book = (status, book_id)
+
+        query = "UPDATE books SET status = %s WHERE customer_id = %s"
+
+        cursor.execute(query, update_book)
+        conn.commit()
+        print("Book status changed succesfully updated!")
+
+    except Error as e:
+        print(f"Error: {e}")
+    
+    finally:
+        if conn and conn.is_connected():
+            cursor.close()
+            conn.close() 
 
 
 
