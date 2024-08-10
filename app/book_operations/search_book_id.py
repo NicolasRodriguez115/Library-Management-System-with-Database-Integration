@@ -14,15 +14,15 @@ Books:
 
         cursor.execute(query)
         for row in cursor.fetchall():
-            if row == book_id:
+            if row[0] == book_id:
                 query = f"SELECT * FROM books WHERE book_id = {book_id}"
                 cursor.execute(query)
                 for book in cursor.fetchall():
                     print(book)
                     input("Press 'enter' to go back.\n ") 
-
             else:
                 input("That ID doesn't exist. You'll go back to the menu after pressing 'enter'\n ")
+                break
 
 
     except Error as e:

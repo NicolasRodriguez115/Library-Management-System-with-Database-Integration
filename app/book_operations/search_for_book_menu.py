@@ -27,12 +27,3 @@ Please select the option by which you'd like to search for a book.
         else:
             input("You've not entered a valid option. Please try again after pressing 'enter'\n ")
 
-
-
-
-    title = input("Enter the title of the book:\n").title()
-    print("---------")
-    for book in library:
-        if book.title == title:         
-            book.show_book()
-            input("Press 'enter' to go back.\n ")

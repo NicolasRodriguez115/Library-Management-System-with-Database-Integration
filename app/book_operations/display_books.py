@@ -1,5 +1,6 @@
 from database.connect import connect_db
 from mysql.connector import Error
+
 def books_display():
     print("""
 Books:
@@ -9,12 +10,18 @@ Books:
         conn = connect_db()
         cursor = conn.cursor()
 
-        query = "SELECT * FROM books"
+        query = """
+        SELECT b.book_id, b.book_name, a.author_name, b.publication_date, b.status
+        FROM books b
+        JOIN authors a ON b.author_id = a.author_id
+        """
 
         cursor.execute(query)
 
         for row in cursor.fetchall():
-            print(row) 
+            book_id, book_name, author_name, publication_date, status = row
+            status_str = "available" if status else "borrowed"
+            print(f"Book ID: {book_id}, Book Name: {book_name}, Author: {author_name}, Year: {publication_date}, Status: {status_str}")
 
         input("Press 'enter' to go back.\n ") 
 
@@ -24,13 +31,4 @@ Books:
     finally:
         if conn and conn.is_connected():
             cursor.close()
-            conn.close()         
-
-    return
-
-
-
-    for book in library:
-        book.show_book()
-    input("When you're done checking the list of books press 'enter'.\n ")
-    return
+            conn.close()
